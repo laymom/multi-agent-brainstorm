@@ -1,89 +1,107 @@
 ---
-description: 멀티에이전트 병렬 발산(5렌즈) → DVFN 수렴으로 아이디어 생성·평가. 인간 그룹 브레인스토밍의 production blocking·평가불안·무임승차를 구조적으로 회피
-argument-hint: <주제 또는 풀어야 할 문제>
+description: Multi-agent brainstorming — 5 lenses diverge in parallel, then converge with DVFN scoring, confidence levels, and a next validation experiment for each top idea
+argument-hint: <topic or problem to solve>
 ---
 
-# /brainstorm — 멀티에이전트 브레인스토밍
+# /brainstorm — Multi-Agent Brainstorming
 
-혼자 떠올리는 대신, **5개 서브에이전트를 서로 다른 렌즈로 병렬 발산**시킨 뒤 어시스턴트가 DVFN으로 수렴. Google Design Sprint의 "개인 발산 → 그룹 수렴"을 멀티에이전트로 구현.
+Instead of generating ideas in a single thread, **dispatch 5 subagents in parallel, each with a different fixed lens**, then converge their ideas with DVFN scoring. This borrows the "individual divergence → group convergence" structure of Google Design Sprint and implements it with isolated agents.
 
-## 근거 (왜 이 구조인가)
+## Why this structure
 
-인간 그룹 브레인스토밍이 개인보다 못한 3대 원인 — production blocking(차례 기다리다 까먹음)·evaluation apprehension(평가불안 자기검열)·social loafing(무임승차) — 은 전부 "한 공간 순차 발화" 문제. 서브에이전트는 병렬·독립·무검열이라 이 함정이 구조적으로 없음. ([Diehl & Stroebe](https://www.sciencedirect.com/science/article/abs/pii/S0022103103000404), [Google Design Sprint](https://designsprintkit.withgoogle.com/methodology))
+Research on human group brainstorming identifies three causes of productivity loss — production blocking (forgetting ideas while waiting your turn), evaluation apprehension (self-censoring), and social loafing (coasting on others). Running isolated agents in parallel and converging only afterward is a design *inspired by* that research. It is not proof that the output is better: five agents running the same model can still converge on similar ideas, which is why each one gets a distinct fixed lens.
 
-## 입력
+## Input
 
 ```text
-/brainstorm <주제 또는 문제>
+/brainstorm <topic or problem>
 ```
 
-예: `/brainstorm 신제품 출시 첫 주 가입자를 어떻게 늘릴까`
+Example: `/brainstorm how do we grow week-one signups for a new product launch`
 
-## 절차
+**Language:** write the whole report in the language the user wrote the topic in.
 
-### [1] HMW 문제 재정의
+## Procedure
 
-주제를 "우리가 어떻게 하면 ~할 수 있을까?(How Might We)" 열린 질문 1~3개로 재구성. 사용자에게 한 줄 확인 (틀어졌으면 교정 받고 진행).
+### [0] Context check (one turn)
 
-### [2] 5개 서브에이전트 병렬 발산
+Before diverging, ask the user one short message covering whatever is missing from the topic:
 
-Task tool(general-purpose) **5개를 한 메시지에 동시 호출** (병렬 = production blocking 0). 각 에이전트에 같은 HMW + 고정 렌즈 1개 + 지시:
+- **Who** is the target (customer / user / audience)?
+- **Goal** — what outcome counts as success?
+- **Constraints** — budget, time, team, things that are off-limits
 
-| # | 고정 렌즈 | 관점 |
+If the user says "skip" or the topic already answers these, proceed and list your assumptions at the top of the report. Never invent context silently.
+
+### [1] Reframe as How Might We
+
+Rewrite the topic as 1–3 open "How might we …?" questions. Confirm with the user in one line (if they correct it, use the corrected version).
+
+### [2] Parallel divergence — 5 subagents
+
+Call the Task tool (general-purpose) **5 times in a single message** so they run in parallel. Give each agent the same HMW question, the context from [0], and exactly one fixed lens:
+
+| # | Fixed lens | Perspective |
 |---|---|---|
-| 1 | **실리콘밸리 PM** | 빠른 실험·MVP·사용자 가치·그로스 |
-| 2 | **대기업 전략기획** | 시장규모·리스크·실행력·기존 자산 활용 |
-| 3 | **디자이너 (IDEO 인간중심)** | 사용자 경험·페인포인트·감정 |
-| 4 | **회의론자 (Devil's Advocate)** | 약점·실패 시나리오·반대 논거 + 그걸 뒤집는 아이디어 |
-| 5 | **타겟 유저 페르소나** | 실제 사용자 입장의 니즈·거부감·대안 |
+| 1 | **Silicon Valley PM** | fast experiments · MVP · user value · growth |
+| 2 | **Enterprise strategist** | market size · risk · execution · leveraging existing assets |
+| 3 | **Designer (IDEO human-centered)** | user experience · pain points · emotion |
+| 4 | **Devil's advocate** | weaknesses · failure scenarios · counter-arguments — plus ideas that flip them |
+| 5 | **Simulated target user** | needs · resistance · alternatives, voiced as a hypothetical user (this is a simulation, not user research) |
 
-각 에이전트 지시 공통:
-- 아이디어 5~7개, **판단 보류**(IDEO rule)하고 양 우선
-- 엉뚱해도 OK, 다른 에이전트 신경 X (독립 발산)
-- 각 아이디어: 한 줄 제목 + 2~3문장 설명
-- ⚠️ 도구 제한: 발산만. 파일 수정·외부 발송 금지
+Shared instructions for every agent:
+- 5–7 ideas. **Defer judgment** (IDEO rule) — quantity first
+- Wild ideas are fine. Ignore the other agents entirely (independent divergence)
+- Each idea: a one-line title + 2–3 sentence description
+- Tool limit: divergence only. No file edits, no external messages
 
-### [3] 수렴 — dedup + DVFN 스코어링
+### [3] Converge — dedup + DVFN scoring
 
-- 5×(5~7) = 25~35개 raw → 제목 유사도로 dedup·머지
-- ⚠️ 머지할 때 **에이전트 설명을 한 줄로 과압축하지 말 것**. 각 변수의 핵심 내용(왜 중요한지, 구체 예시)을 살려 [4]의 상술에 쓸 재료로 보존.
-- 각 아이디어 4축 점수 (각 1~5) — **항상 풀네임으로 표기**:
-  - **Desirability (매력성)** — 타겟이 원하나
-  - **Viability (사업성)** — 수익·확장
-  - **Feasibility (실현성)** — 만들 수 있나
-  - **Novelty (참신성)** — 차별적인가
-- 합산 점수 정렬
+- Merge the 25–35 raw ideas by similarity
+- When merging, **do not compress an agent's description into one line**. Keep the substance (why it matters, concrete examples) as material for the details in [4]
+- Score each idea 1–5 on four axes — **always write the full names**:
+  - **Desirability** — does the target actually want it?
+  - **Viability** — can it make money / scale?
+  - **Feasibility** — can it be built with the stated constraints?
+  - **Novelty** — is it differentiated?
+- Give each idea a **confidence** level (High / Medium / Low) — how much the scores rest on evidence vs. guesswork
+- Sort by total score
 
-### [4] 보고
+### [4] Report
 
-⚠️ 점수 약자 금지 — 표 위에 항상 풀네임 범례를 둔다. 각 변수는 **요약 1줄 + 상술 2~4문장**을 반드시 병기 (한 줄 압축만 X — 읽는 사람이 와닿게).
+Always put the full-name legend above the table — no bare initials. Every top idea gets a **one-line summary plus a 2–4 sentence detail**; a single compressed line is not enough.
 
-⚠️ **언어 — 청중이 해당 도메인 비전문가면, 일반인 언어 + 전문 용어 병기 필수**. 상술에 전문용어·영어 약어가 나오면 **그 자리에서 쉬운 풀이를 병기**한다. 형식: "쉬운 설명(전문용어, 영어약어)". 예: "꿈꾸고 뇌가 정리되는 얕은 수면(렘수면, REM)", "잘 자야 한다는 강박 탓에 오히려 못 자는 현상(오소솜니아, orthosomnia)", "진짜 원인을 헷갈리게 하는 끼어든 요인(교란변수, confounder)". 용어만 던지고 넘어가지 말 것.
+**Plain language:** if the audience is not a domain expert, gloss every technical term or acronym in place, in the form "plain explanation (term, ACRONYM)" — e.g. "a hidden factor that muddies the real cause (confounder)".
 
 ```markdown
-## HMW: <재정의된 질문>
+## HMW: <reframed question>
 
-> 점수 범례: **Desirability(매력성)** · **Viability(사업성)** · **Feasibility(실현성)** · **Novelty(참신성)** — 각 1~5점, 어시스턴트 평가
+**Context:** target · goal · constraints (mark anything assumed as "assumed")
 
-### 상위 아이디어 (스코어 한눈에)
-| 순위 | 아이디어 | Desirability 매력성 | Viability 사업성 | Feasibility 실현성 | Novelty 참신성 | 합 | 출처 렌즈 |
-|---|---|---|---|---|---|---|---|
+> Score legend: **Desirability** · **Viability** · **Feasibility** · **Novelty** — 1–5 each. These are the assistant's judgments, not measurements.
 
-### 상위안 상세 (요약 + 상술 병기)
-각 상위 변수마다:
-- **[변수명]** — *요약*: 한 줄 핵심
-  - *상술*: 2~4문장. 에이전트들이 낸 구체 내용·예시·왜 중요한지 살려서 설명
-  - *점수 사유*: 매력성 N / 사업성 N / 실현성 N / 참신성 N — 각 한 줄 근거
+### Top ideas at a glance
+| Rank | Idea | Desirability | Viability | Feasibility | Novelty | Total | Confidence | Source lens |
+|---|---|---|---|---|---|---|---|---|
 
-### 탈락했지만 흥미로운 와일드카드 1~2개 (요약 + 상술)
-### 어시스턴트 추천 (주관 판단임을 명시)
+### Top ideas in detail
+For each top idea:
+- **[Idea]** — *Summary*: one line
+  - *Detail*: 2–4 sentences, keeping the agents' concrete content and examples
+  - *Score rationale*: Desirability N / Viability N / Feasibility N / Novelty N — one line each
+  - *Key assumption*: the belief that, if wrong, kills this idea
+  - *Next validation experiment*: the cheapest test of that assumption — what to do, and what result would count as a pass
+
+### Wildcards — cut but interesting (1–2, summary + detail)
+### Assistant's recommendation (state that this is a subjective judgment)
 ```
 
-## 가드레일
+## Guardrails
 
-- ❌ 발산 단계에서 어시스턴트가 미리 자기검열·필터 금지 (수렴은 [3]에서만)
-- ❌ DVFN 점수를 근거 없이 매기지 말 것 — 각 점수 한 줄 사유
-- ❌ 점수 약자(D·V·F·N)만 쓰지 말 것 — 항상 풀네임(Desirability 매력성 등) 병기
-- ❌ 변수를 한 줄로만 압축하지 말 것 — 요약 + 상술(2~4문장) 병기 (읽는 사람이 와닿게)
-- ✅ 5개 에이전트는 **반드시 한 메시지에 병렬 호출** (순차 X — production blocking 회피가 핵심)
-- ✅ 점수는 어시스턴트의 주관 판단이므로 "이건 내 평가"임을 명시 (출처 있는 사실과 구분)
+- ❌ No filtering or self-censoring during divergence — convergence happens only in [3]
+- ❌ No DVFN score without a one-line rationale
+- ❌ No bare initials (D·V·F·N) — always full names
+- ❌ No one-line-only ideas — summary + 2–4 sentence detail
+- ❌ Do not present simulated-user output as real user evidence
+- ✅ The 5 agents **must be dispatched in one message** — parallel, independent divergence is the point
+- ✅ Label scores and the recommendation as the assistant's judgment, separate from sourced facts
