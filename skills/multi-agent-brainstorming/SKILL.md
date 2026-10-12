@@ -35,7 +35,7 @@ If the user says "skip" or the topic already answers these, proceed and list you
 
 ### [1] Reframe as How Might We
 
-Rewrite the topic as 1–3 open "How might we …?" questions. Confirm with the user in one line (if they correct it, use the corrected version).
+Rewrite the topic as 1–3 open "How might we …?" questions. Confirm with the user in one line (if they correct it, use the corrected version). If the user has asked you to proceed without stopping, or no reply is possible, state the HMW you are using and continue.
 
 ### [2] Parallel divergence — 5 subagents
 
@@ -66,7 +66,8 @@ Lens 5 output is a **Synthetic persona response**. Keep that label in the report
   - **Viability** — can it make money / scale?
   - **Feasibility** — can it be built with the stated constraints?
   - **Novelty** — is it differentiated?
-- Give each idea a **confidence** level (High / Medium / Low) — how much the scores rest on evidence vs. guesswork
+- Give each idea a **confidence** level — exactly one of High, Medium, Low — for how much the scores rest on evidence vs. guesswork
+- Synthetic persona responses (lens 5) are hypotheses, not evidence. A score rationale may cite them only as "(synthetic)", never as "users said"
 - Sort by total score
 
 ### [4] Report
@@ -83,6 +84,7 @@ Always put the full-name legend above the table — no bare initials. Every top 
 > Score legend: **Desirability** · **Viability** · **Feasibility** · **Novelty** — 1–5 each. These are the assistant's judgments, not measurements.
 
 ### Top ideas at a glance
+List the top 5 (no more). Every idea in this table gets a full entry in "Top ideas in detail".
 | Rank | Idea | Desirability | Viability | Feasibility | Novelty | Total | Confidence | Source lens |
 |---|---|---|---|---|---|---|---|---|
 
@@ -92,7 +94,7 @@ For each top idea:
   - *Detail*: 2–4 sentences, keeping the agents' concrete content and examples
   - *Score rationale*: Desirability N / Viability N / Feasibility N / Novelty N — one line each
   - *Key assumption*: the belief that, if wrong, kills this idea
-  - *Next validation experiment*: the cheapest test of that assumption — what to do, and what result would count as a pass
+  - *Next validation experiment*: the cheapest test of that assumption — what to do, and **Pass = <a specific, observable result>** (an experiment without a pass line is incomplete)
 
 ### Wildcards — cut but interesting (1–2, summary + detail)
 ### Assistant's recommendation (state that this is a subjective judgment)

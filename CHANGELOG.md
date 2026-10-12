@@ -12,6 +12,13 @@
 ### Added
 - `scripts/check-sync.js` checks that the skill and command bodies are identical
 
+### Fixed (found in a smoke test from a fresh, isolated install)
+- Score rationales could cite the simulated user as evidence ("users said"). Now they may cite it only as "(synthetic)"
+- The table could list more ideas than the detail section covered. Now it lists the top 5, and each one gets a full entry
+- Validation experiments could lack a pass line. Now each needs "Pass = <observable result>"
+- Confidence values like "Med-High" appeared. Now only High, Medium, or Low is allowed
+- Non-interactive runs: the HMW question is stated and the run continues
+
 ## 1.1.0 — 2026-10-11
 
 ### Added
