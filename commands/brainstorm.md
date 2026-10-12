@@ -67,7 +67,8 @@ Lens 5 output is a **Synthetic persona response**. Keep that label in the report
   - **Feasibility** — can it be built with the stated constraints?
   - **Novelty** — is it differentiated?
 - Give each idea a **confidence** level — exactly one of High, Medium, Low — for how much the scores rest on evidence vs. guesswork
-- Synthetic persona responses (lens 5) are hypotheses, not evidence. A score rationale may cite them only as "(synthetic)", never as "users said"
+- Synthetic persona responses (lens 5) are hypotheses, not evidence. **Score rationales never use lens 5 or agreement between lenses as a reason** (lenses share one model, so agreement is not evidence). Score on the idea itself and the stated context
+- Whenever lens 5 content appears anywhere in the report, use exactly this form: `Simulated user (synthetic): "<quote>"`, then on the next line `Hypothesis: <what it suggests, to be tested>`
 - Sort by total score
 
 ### [4] Report
@@ -105,7 +106,7 @@ For each top idea:
 Fix the report until every answer is "yes":
 
 1. Is every Confidence value exactly `High`, `Medium`, or `Low`? (Values such as "Medium-High" or "Med" are not allowed. Pick one.)
-2. Search the whole report, including details, score rationales, and the recommendation, for "said", "literally", "validated", "confirmed", "users want", and "teens want". Is every hit about a synthetic persona rewritten as a hypothesis and tagged "(synthetic)"? Simulated output never *validates* anything.
+2. Read every sentence that draws on lens 5 or on lens agreement. Does any of them state, as fact, what users want, feel, need, or confirmed, or say the simulated user "was right"? Rewrite each one into the `Simulated user (synthetic)` + `Hypothesis:` form. Does any score rationale mention lens 5 or lens agreement? Remove it. (Checking for specific words is not enough. Check what each sentence means.)
 3. Does the top-ideas table have 5 rows or fewer, each with a detail entry?
 4. Does every Next validation experiment contain "Pass =" with an observable result?
 

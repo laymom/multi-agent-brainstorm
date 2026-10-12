@@ -18,6 +18,7 @@
 - Validation experiments could lack a pass line. Now each needs "Pass = <observable result>"
 - Confidence values like "Med-High" appeared. Now only High, Medium, or Low is allowed
 - Non-interactive runs: the HMW question is stated and the run continues
+- Score rationales no longer use lens 5 or agreement between lenses as a reason. Lens 5 content appears only as `Simulated user (synthetic)` followed by `Hypothesis:`. A third smoke test showed that banning words ("said", "validated") only moved the problem to other words ("confirmed", "was right")
 - Added a final check run on the finished report. A second smoke test still produced "Medium-High" and "teens validated" when these rules were only written in the procedure
 
 ## 1.1.0 — 2026-10-11
