@@ -18,6 +18,7 @@
 - Validation experiments could lack a pass line. Now each needs "Pass = <observable result>"
 - Confidence values like "Med-High" appeared. Now only High, Medium, or Low is allowed
 - Non-interactive runs: the HMW question is stated and the run continues
+- Added a final check run on the finished report. A second smoke test still produced "Medium-High" and "teens validated" when these rules were only written in the procedure
 
 ## 1.1.0 — 2026-10-11
 

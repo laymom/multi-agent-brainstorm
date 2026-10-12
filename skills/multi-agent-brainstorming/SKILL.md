@@ -100,6 +100,15 @@ For each top idea:
 ### Assistant's recommendation (state that this is a subjective judgment)
 ```
 
+## Final check — run this on the finished report before sending it
+
+Fix the report until every answer is "yes":
+
+1. Is every Confidence value exactly `High`, `Medium`, or `Low`? (Values such as "Medium-High" or "Med" are not allowed. Pick one.)
+2. Search the whole report, including details, score rationales, and the recommendation, for "said", "literally", "validated", "confirmed", "users want", and "teens want". Is every hit about a synthetic persona rewritten as a hypothesis and tagged "(synthetic)"? Simulated output never *validates* anything.
+3. Does the top-ideas table have 5 rows or fewer, each with a detail entry?
+4. Does every Next validation experiment contain "Pass =" with an observable result?
+
 ## Guardrails
 
 - ❌ No filtering or self-censoring during divergence — convergence happens only in [3]
