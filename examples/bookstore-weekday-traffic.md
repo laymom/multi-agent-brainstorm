@@ -1,6 +1,8 @@
 # Example: growing weekday foot traffic for an independent bookstore
 
-A real, unedited run of the skill. The converged report is below, and the raw output of all 5 lens agents is at the bottom so you can check how the convergence was done.
+A real run of the procedure in a Claude Code session. The converged report is below, and the raw output of all 5 lens agents is at the bottom, unedited, so you can check how the convergence was done.
+
+**Run notes:** the context for step [0] was given up front, and the step [1] How-Might-We question was used as written without a separate confirmation turn. The procedure was followed in the author's session; it was not invoked through a fresh install of the skill. Lens 5 output is a **Synthetic persona response**, not user research.
 
 | | |
 |---|---|

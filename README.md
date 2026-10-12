@@ -6,7 +6,7 @@
 /brainstorm how can my neighborhood bookstore get more people in on weekdays?
 ```
 
-You get back a ranked table like this (excerpt from a [real, unedited run](examples/bookstore-weekday-traffic.md)):
+You get back a ranked table like this (excerpt from a [real run](examples/bookstore-weekday-traffic.md); lens outputs unedited, see the run notes):
 
 | Rank | Idea | Desirability | Viability | Feasibility | Novelty | Total | Confidence | Source lens |
 |---|---|---|---|---|---|---|---|---|
@@ -37,7 +37,9 @@ cp multi-agent-brainstorm/commands/brainstorm.md ~/.claude/commands/
 
 On Windows (PowerShell), the destination is `$HOME\.claude\commands\`. Start a new Claude Code session and type `/brainstorm`.
 
-Tested in Claude Code only. The skill relies on Claude Code's Task tool to run 5 subagents in parallel, so other agents may install it but are untested.
+**How to run it:** installed as a skill, type `/multi-agent-brainstorming` (or just ask Claude to brainstorm); installed as a command, type `/brainstorm`. The examples below use `/brainstorm`.
+
+Tested in Claude Code only. The skill relies on Claude Code's Agent tool (called Task in older versions) to run 5 subagents in parallel, so other agents may install it but are untested.
 
 ## Use
 
@@ -85,12 +87,24 @@ The structure, independent divergence first and convergence afterward, is borrow
 - Nijstad, B. A., Stroebe, W., & Lodewijkx, H. F. M. (2003). Production blocking and idea generation: Does blocking interfere with cognitive processes? *Journal of Experimental Social Psychology, 39*(6), 531–548. [doi:10.1016/S0022-1031(03)00040-4](https://doi.org/10.1016/S0022-1031(03)00040-4)
 - [Google Design Sprint methodology](https://designsprintkit.withgoogle.com/methodology)
 
+## Related tools
+
+Small, independent tools by the same author. Use any of them on its own; none requires the others.
+
+- [multi-agent-brainstorm](https://github.com/laymom/multi-agent-brainstorm) — explore and compare ideas from 5 perspectives
+- [synthetic-focus-group](https://github.com/laymom/synthetic-focus-group) — explore reactions and risky assumptions with simulated personas
+- [ai-prd-generator](https://github.com/laymom/ai-prd-generator) — turn an idea into a PRD with scope and acceptance criteria
+- [consulting-ux-strategy](https://github.com/laymom/consulting-ux-strategy) — audit flows, information architecture, and usability, then prioritize fixes
+
+When passing output between them, keep the evidence labels (User-provided fact, Sourced fact, Real user research, AI assumption, Synthetic persona response, Approved decision, Open question). Simulated persona responses stay labeled as synthetic in every downstream document.
+
 ## Repository layout
 
 ```text
 skills/multi-agent-brainstorming/SKILL.md   # skill format (npx skills add)
 commands/brainstorm.md                      # /brainstorm slash command — same body
-examples/                                   # real, unedited runs
+examples/                                   # real runs, with run notes
+scripts/check-sync.js                       # checks the skill and command bodies match
 ```
 
 ## License

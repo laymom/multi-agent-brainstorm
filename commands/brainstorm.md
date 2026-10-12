@@ -39,7 +39,7 @@ Rewrite the topic as 1–3 open "How might we …?" questions. Confirm with the 
 
 ### [2] Parallel divergence — 5 subagents
 
-Call the Task tool (general-purpose) **5 times in a single message** so they run in parallel. Give each agent the same HMW question, the context from [0], and exactly one fixed lens:
+Call the Agent tool (named Task in older Claude Code versions; use the general-purpose agent) **5 times in a single message** so they run in parallel. Give each agent the same HMW question, the context from [0], and exactly one fixed lens:
 
 | # | Fixed lens | Perspective |
 |---|---|---|
@@ -54,6 +54,8 @@ Shared instructions for every agent:
 - Wild ideas are fine. Ignore the other agents entirely (independent divergence)
 - Each idea: a one-line title + 2–3 sentence description
 - Tool limit: divergence only. No file edits, no external messages
+
+Lens 5 output is a **Synthetic persona response**. Keep that label in the report and in anything passed to other tools; never present it as real user research.
 
 ### [3] Converge — dedup + DVFN scoring
 

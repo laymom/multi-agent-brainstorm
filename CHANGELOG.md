@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.1 — 2026-10-12
+
+### Changed
+- Tool name updated: subagents are dispatched with the Agent tool (named Task in older Claude Code versions)
+- README states both invocation names: `/multi-agent-brainstorming` (skill) and `/brainstorm` (command)
+- Example run notes state exactly how the run was done (context given up front, HMW confirmation skipped, not run from a fresh install). The "unedited" label now applies only to the lens outputs
+- Lens 5 output is labeled **Synthetic persona response** and keeps that label downstream
+- README adds a Related tools section with shared evidence labels
+
+### Added
+- `scripts/check-sync.js` checks that the skill and command bodies are identical
+
 ## 1.1.0 — 2026-10-11
 
 ### Added
