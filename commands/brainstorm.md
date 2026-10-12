@@ -108,7 +108,8 @@ Fix the report until every answer is "yes":
 1. Is every Confidence value exactly `High`, `Medium`, or `Low`? (Values such as "Medium-High" or "Med" are not allowed. Pick one.)
 2. Read every sentence that draws on lens 5 or on lens agreement. Does any of them state, as fact, what users want, feel, need, or confirmed, or say the simulated user "was right"? Rewrite each one into the `Simulated user (synthetic)` + `Hypothesis:` form. Does any score rationale mention lens 5 or lens agreement? Remove it. (Checking for specific words is not enough. Check what each sentence means.)
 3. Does the top-ideas table have 5 rows or fewer, each with a detail entry?
-4. Does every Next validation experiment contain "Pass =" with an observable result?
+4. Does every Next validation experiment contain "Pass =" with an observable result? Can the stated measurement method record every condition in the pass line, and is there a baseline to compare against? If not, change the method or the pass line.
+5. Take every specific detail that came only from lens 5 (prices, quotes, situations, feelings) and look for it in the details, rationales, and recommendation. Wherever it appears without the `Simulated user (synthetic)` form, rewrite it or remove it. Do the same for claims about what the target group thinks or does that have no source: label them as hypotheses.
 
 ## Guardrails
 
