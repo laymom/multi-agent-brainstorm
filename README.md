@@ -21,7 +21,7 @@ You get back a ranked table like this (excerpt from a [real, unedited run](examp
 
 ## Install
 
-**Option A — as a skill (Claude Code and other agents supported by the [skills CLI](https://github.com/vercel-labs/skills)):**
+**Option A — as a skill, via the [skills CLI](https://github.com/vercel-labs/skills):**
 
 ```bash
 npx skills add laymom/multi-agent-brainstorm --skill multi-agent-brainstorming
@@ -36,6 +36,8 @@ cp multi-agent-brainstorm/commands/brainstorm.md ~/.claude/commands/
 ```
 
 On Windows (PowerShell), the destination is `$HOME\.claude\commands\`. Start a new Claude Code session and type `/brainstorm`.
+
+Tested in Claude Code only. The skill relies on Claude Code's Task tool to run 5 subagents in parallel, so other agents may install it but are untested.
 
 ## Use
 
