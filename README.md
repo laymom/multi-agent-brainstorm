@@ -76,7 +76,6 @@ They work well together. Use this one when you don't yet know which direction to
 
 - **Scores are the assistant's judgment, not measurements.** Each one comes with a reason and a confidence level so you can disagree with it.
 - **The simulated user is not user research.** Treat that lens's output as hypotheses to test, not evidence.
-- **The final check reduces but does not eliminate mistakes.** In our smoke tests (fresh, isolated installs), the model sometimes still restated a simulated user's line as fact in the idea details. Each fix in the [changelog](CHANGELOG.md) came from those runs. Read the details critically.
 - **Same model, different lenses.** All 5 agents run on the same model, so ideas can repeat across lenses (in the example run, one idea appeared in all 5). Convergence merges repeats and does not add points for them, and the "Source lens" column shows where lenses agreed.
 - **Cost.** One run dispatches 5 subagents, so it uses noticeably more tokens than a single prompt.
 
