@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.2.0 — 2026-10-13
+
+### Changed
+- **New default result: Paths.** Instead of a scored table, the default report is 3 paths that work through different mechanisms, each with a first step for this week, what you gain, what you give up, a key assumption, and a validation experiment with a pass line. It adds one contrarian path that reverses your current direction, and a short qualitative comparison of the 3 paths
+- The previous detailed report (top-5 Desirability/Viability/Feasibility/Novelty table, details, wildcards, recommendation) is now the **"full table"** option. Ask for it in the topic or after a Paths report; it reuses the same ideas and scores
+- The context check also asks, optionally, **what you have already tried or considered**. The 5 lenses receive that list and may not repeat it; a variant must say in one line what is new. Convergence removes ideas that duplicate it
+- Budget, team, time, and off-limits constraints are now **hard limits**: ideas that break them are dropped or adapted, and the report says so in one line
+- Final check covers the Paths format (3 different mechanisms, a gain and a real give-up for each path, a contrarian path that reverses something, nothing repeated from the already-tried list)
+- README leads with the outcome (options you missed, 3 paths to act on) rather than the number of agents
+
+### Added
+- `examples/bookstore-stuck-paths.md`, a fresh-install run of the Paths mode, with a comparison against plain chat on the same input
+- `examples/bookstore-stuck-baseline-plain-chat.md`, the plain-chat output used in that comparison
+
 ## 1.1.1 — 2026-10-12
 
 ### Changed
