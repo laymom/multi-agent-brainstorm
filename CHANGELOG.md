@@ -9,6 +9,7 @@
 - Budget, team, time, and off-limits constraints are now **hard limits**: ideas that break them are dropped or adapted, and the report says so in one line
 - Final check covers the Paths format (3 different mechanisms, a gain and a real give-up for each path, a contrarian path that reverses something, nothing repeated from the already-tried list)
 - README leads with the outcome (options you missed, 3 paths to act on) rather than the number of agents
+- **The perspective layer is visible in the Paths report.** Each path and the contrarian path say which lens it came from, with the lens's job in parentheses (for example "Designer (ease of use) + PM (fast test)"). Each path adds the devil's advocate's strongest pushback, taken from what that lens actually wrote or labeled AI assumption if it said nothing on that path. One line names where two lenses disagreed, traced to their outputs, or says they didn't. Each lens is now told the failure it guards against, and the devil's advocate also lists failure scenarios for likely approaches. The final check verifies all of this against the raw lens outputs. README explains why these five lenses, with sources
 
 ### Added
 - `examples/bookstore-stuck-paths.md`, a fresh-install run of the Paths mode, with a comparison against plain chat on the same input

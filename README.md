@@ -1,6 +1,6 @@
 # Multi-agent brainstorming for Claude Code — find the options you missed
 
-**When you're stuck on a product or business problem, tell it what you've already tried and what your limits are. You get 3 different paths you can act on this week, with what each one gains and gives up, plus one option that challenges your current direction.**
+**When you're stuck on a product or business problem, 5 perspectives work on it separately — a PM, a strategist, a designer, a skeptic, and a simulated customer — each owning a different reason ideas fail: whether you can test it fast, whether it pays, whether it's easy to use, where it breaks, and whether people want it. So the options come from five angles instead of one, and you see where they disagree. Tell it what you've already tried and your limits; you get 3 different paths you can act on this week, each with what it gains and gives up and the skeptic's strongest pushback, plus one option that challenges your current direction.**
 
 ```text
 /brainstorm Our neighborhood bookstore is stuck: weekday visitors are flat. Already tried: a loyalty stamp card, Instagram posts, an author talk once a month. Limits: 2 staff, $500/month marketing, no renovation. Goal: +20% weekday visitors in 3 months.
@@ -8,20 +8,35 @@
 
 Excerpt from a [real run from a fresh install](examples/bookstore-stuck-paths.md) (fictional bookstore):
 
-> **Path 2 — "3:15 Kid Shelf": a rolling cart by the door for parents at school pickup**
-> - **This week:** Move or clear a low shelf near the entrance, hand-tag it "For 7-year-olds, right now" and "For 4-year-olds, right now," and stock 15 impulse-friendly titles ≤$15 before Monday.
-> - **You give up / risk:** Prime front-door real estate reallocated to kids' books, which shifts the store's visible identity and may alienate adult browsers who glance in.
-> - **Next validation experiment:** Before stocking the cart, count parent-with-child foot traffic past your door 3:00–3:30 for one week — **Pass = ≥40 parent+child walk-bys across 5 weekdays**
+> **Path 3 — Shelf swap with 5 neighbor businesses**
+> - **From:** PM (fast test) + Strategist (pays and lasts) + Devil's advocate (where it breaks)
+> - **This week:** pitch 5 nearby businesses (café, salon, dentist, school PTA, residential lobby) a 10-book "neighborhood reads" display they host in exchange for their menu/flyer/beans at your counter, each book stickered "Return or buy at [Bookstore] — open Tue–Thu."
+> - **You gain:** physical cross-placement puts your inventory in front of foot traffic you don't currently touch, at near-zero marketing spend.
+> - **You give up / risk:** 10–20 books tied up per partner for 2–4 weeks and 2–3 hours/week per staff for restock, with a real chance partners capture the value instead of you.
+> - **Strongest pushback (Devil's advocate):** Lens 4 scenario #2 — "the café gets the lingering customers and the sales, the bookstore gets credit-less referrals and crumbs on the fiction shelf; after 8 weeks the arrow of value points the wrong way."
+> - **Next validation experiment:** pitch 5 partners in week 1 and sticker all placed books — **Pass = ≥10 stickered books trigger an identifiable new-face visit to the store within 4 weeks (counted at the register by asking "did you see us somewhere nearby?").**
 >
-> **Contrarian path — Pause Instagram and the author talk; replace them with a daily sidewalk chalkboard and a Monday text to 40 past regulars**
-> - **It flips:** Your current marketing mix — broadcast digital (Instagram) plus one spiky monthly event (author talk) — toward continuous, hyperlocal, one-to-few moves.
+> **Where the perspectives disagreed:** PM proposed "Bring Your Laptop" quiet work hours to pull remote workers into the dead 2–4pm block, while Devil's advocate scenario #6 said remote-worker weekday pushes create "3 laptop-squatters nursing one coffee for 5 hours" and a negative flywheel — i.e., they disagree on whether the fix for the dead block is to invite workers *in* or deliberately keep them out.
 >
-> | | Path 1 Lunch Loop | Path 2 Kid Shelf | Path 3 Library Piggyback |
-> |---|---|---|---|
-> | Speed to signal | 3 weeks | 1 week (foot-traffic count), 2–3 weeks (sales) | 2 weeks |
-> | Main risk | No one shows up; "silent" feels off-putting | Not enough school foot traffic past door | Library declines or patrons don't convert |
+> **Contrarian path — Fire Instagram for 90 days, spend the $500 on 20 named patrons**
+> - **From:** Devil's advocate (where it breaks)
+> - **It flips:** your current direction of broadcast-marketing to strangers + volume-based loyalty, reversing it into deep service to a small named circle (lens 4 argues $500/month on Instagram without paid ads is almost certainly sub-threshold reach).
 
-None of the paths repeats the stamp card, Instagram posts, or author talk. The three work in different ways (a weekday ritual for nearby workers, an impulse moment for parents at pickup, traffic borrowed from the library), so one failing tells you little about the others.
+None of the paths repeats the stamp card, Instagram posts, or author talk. The three work in different ways (a weekday hold shelf, a declared quiet hour, and traffic borrowed from neighbor businesses), and each one shows which perspectives it came from and the skeptic's case against it.
+
+## Why these five perspectives
+
+Ideas usually fail for one of a few known reasons. Each lens owns one of them, and the five generate ideas separately, without seeing each other's output, so they don't anchor on each other.
+
+| Lens | Question it owns | Failure it guards against |
+|---|---|---|
+| Simulated customer (synthetic — not user research) | Do people actually want it? | No one wants it |
+| Designer (IDEO human-centered) | Is it easy and appealing to use? | Wanted but unusable |
+| Silicon Valley PM | Can you test it fast and cheap? | Resources run out before you learn |
+| Enterprise strategist | Does it pay and last, using assets you have? | It works but isn't worth it |
+| Devil's advocate | Where does it break? | Everyone agrees and misses the trap |
+
+The first four roughly follow two well-known product checklists: IDEO's [desirability, viability, and feasibility](https://designthinking.ideo.com/introduction) lenses and Marty Cagan's [four big risks](https://www.svpg.com/four-big-risks/) (value, usability, feasibility, business viability). The devil's advocate draws on research on dissent in group decisions, which also found that role-played dissent falls short of someone who genuinely disagrees ([Nemeth, Brown & Rogers, 2001](https://doi.org/10.1002/ejsp.58)), so read its pushback as something to check, not a verdict. This is the design rationale. It has not been shown that giving an LLM these five roles produces better ideas than a single prompt.
 
 ## Install
 
@@ -59,9 +74,10 @@ The report is written in the language of your prompt.
 ## What you get
 
 1. **One context question** for whatever is missing: who the target is, the goal, your limits, and (optionally) what you've already tried. Say "skip" and anything assumed is marked "(assumed)".
-2. **3 paths that work in different ways**, not three versions of one idea. Each has a first step for this week, what you gain, what you give up, the assumption that would kill it, and a cheap test with a pass line.
-3. **1 contrarian path** that reverses something you're doing or assuming now, and why it might be right.
-4. **A short side-by-side table** of the 3 paths (cost and effort, speed to signal, upside, main risk), labeled as the assistant's judgment.
+2. **3 paths that work in different ways**, not three versions of one idea. Each says which perspective it came from, then gives a first step for this week, what you gain, what you give up, the devil's advocate's strongest pushback, the assumption that would kill it, and a cheap test with a pass line.
+3. **One line on where the perspectives disagreed**, taken from what the lenses actually wrote (or a plain "they didn't").
+4. **1 contrarian path** that reverses something you're doing or assuming now, and why it might be right.
+5. **A short side-by-side table** of the 3 paths (cost and effort, speed to signal, upside, main risk), labeled as the assistant's judgment.
 
 Your limits are treated as hard limits: ideas that need more budget, staff, or time than you have are dropped or adapted, and the report says so in one line. Ideas you've already tried aren't repeated; a variant has to say what's new.
 
@@ -76,19 +92,11 @@ After a Paths report, or in the first message, ask for the **full table**: every
 
 ### How the options are found
 
-Your problem is reframed as a "How might we…?" question, then 5 subagents generate ideas in parallel, each from one fixed lens, without seeing each other's output. The ideas are merged, filtered against your tried list and limits, grouped by how they would move your goal, and scored. The 3 paths come from the highest-scoring ideas with different mechanisms.
-
-| # | Lens | Perspective |
-|---|------|-------------|
-| 1 | Silicon Valley PM | fast experiments · MVP · user value · growth |
-| 2 | Enterprise strategist | market size · risk · execution · existing assets |
-| 3 | Designer (IDEO human-centered) | experience · pain points · emotion |
-| 4 | Devil's advocate | failure scenarios, and ideas that flip them |
-| 5 | Simulated target user | needs · resistance · alternatives, as a *hypothetical* user |
+Your problem is reframed as a "How might we…?" question, then the five lenses in [Why these five perspectives](#why-these-five-perspectives) generate ideas in parallel as separate subagents. The ideas are merged, filtered against your tried list and limits, grouped by how they would move your goal, and scored. The 3 paths come from the highest-scoring ideas with different mechanisms; each keeps the name of the lens it came from, and the devil's advocate's failure scenarios are attached as pushback.
 
 ## Compared with plain chat
 
-We ran the same bookstore input in plain chat with no skill installed ([output](examples/bookstore-stuck-baseline-plain-chat.md)). Plain chat was much faster and already gave 3 distinct directions with a trade-off each, and it also questioned the Instagram spend. What only the skill run produced: a first step for this week per path, a key assumption and a test with a pass line per path, a contrarian path with its own check, an explicit line on what didn't fit your limits, and a full scored table on request. If you want a quick answer, plain chat may be enough; use this when you want options you can test and compare. Details are in the [example](examples/bookstore-stuck-paths.md#compared-with-plain-chat-same-input-no-skill).
+We ran the same bookstore input in plain chat with no skill installed ([output](examples/bookstore-stuck-baseline-plain-chat.md)). Plain chat was much faster, and many of its ideas were close to the skill's: a café partnership, a weekday reading hour with tea, and moving the Instagram budget to local promotion. The difference was what you see around the ideas. Only the skill run showed which perspective each path came from, a separate skeptic's strongest case against each path (for the café-style partnership: partners "get the lingering customers and the sales"), and where two perspectives disagreed (the PM wanted to invite laptop workers into the dead afternoon; the skeptic said they'd make the store look empty). It also added a first step for this week, a key assumption and a test with a pass line per path, a contrarian path with its own check, and a line on what didn't fit your limits. If you want a quick answer, plain chat may be enough; use this when you want to see the options from several sides before you commit. Details are in the [example](examples/bookstore-stuck-paths.md#compared-with-plain-chat-same-input-no-skill).
 
 It also differs from conversational brainstorming skills like [Superpowers' `brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md), which ask one question at a time to find out **what you actually want** and end in a design document. This tool **widens and compares options** when you don't yet know which direction to take. They work well together.
 
@@ -97,7 +105,7 @@ It also differs from conversational brainstorming skills like [Superpowers' `bra
 - **The comparison and scores are the assistant's judgment, not measurements.** Each comes with a reason so you can disagree with it.
 - **The simulated user is not user research.** Treat that lens's output as hypotheses to test, not evidence.
 - **Same model, different lenses.** All 5 agents run on the same model, so ideas can repeat across lenses. Repeats are merged and don't add points.
-- **It takes longer than a plain prompt.** A run dispatches 5 subagents; the example took about 5 minutes and uses more of your usage limit than a single question.
+- **It takes longer than a plain prompt.** A run dispatches 5 subagents; the example took about 4 minutes and uses more of your usage limit than a single question.
 - **It doesn't know your numbers.** Pass lines need a baseline; if you don't have one, the first step is usually to start counting.
 
 ## Related tools
@@ -118,6 +126,9 @@ The structure, independent divergence first and convergence afterward, is borrow
 - Diehl, M., & Stroebe, W. (1987). Productivity loss in brainstorming groups: Toward the solution of a riddle. *Journal of Personality and Social Psychology, 53*(3), 497–509. [doi:10.1037/0022-3514.53.3.497](https://doi.org/10.1037/0022-3514.53.3.497)
 - Nijstad, B. A., Stroebe, W., & Lodewijkx, H. F. M. (2003). Production blocking and idea generation: Does blocking interfere with cognitive processes? *Journal of Experimental Social Psychology, 39*(6), 531–548. [doi:10.1016/S0022-1031(03)00040-4](https://doi.org/10.1016/S0022-1031(03)00040-4)
 - [Google Design Sprint methodology](https://designsprintkit.withgoogle.com/methodology)
+- Nemeth, C., Brown, K., & Rogers, J. (2001). Devil's advocate versus authentic dissent: Stimulating quantity and quality. *European Journal of Social Psychology, 31*(6), 707–720. [doi:10.1002/ejsp.58](https://doi.org/10.1002/ejsp.58)
+- IDEO, [Design Thinking: Desirability, Viability, Feasibility](https://designthinking.ideo.com/introduction)
+- Cagan, M. (2017). [The Four Big Risks](https://www.svpg.com/four-big-risks/). Silicon Valley Product Group
 
 ## Repository layout
 
