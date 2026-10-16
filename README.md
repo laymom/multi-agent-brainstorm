@@ -1,6 +1,6 @@
 # Multi-agent brainstorming for Claude Code — find the options you missed
 
-**When you're stuck on a product or business problem, 5 perspectives work on it separately. They are a PM, a strategist, a designer, a skeptic, and a simulated customer. Each one owns a different reason ideas fail. The PM asks whether you can test it fast. The strategist asks whether it pays. The designer asks whether it's easy to use. The skeptic asks where it breaks. The simulated customer asks whether people want it. So the options come from five angles instead of one. You also see where the perspectives disagree. Tell it what you've already tried and your limits. You get 3 different paths you can act on this week. Each path shows what it gains and what it gives up. Each path also shows the skeptic's strongest pushback. You also get one option that challenges your current direction.**
+**Stuck on a product or business problem? Five perspectives work on it separately, each guarding against a different way ideas fail. You get 3 paths you can act on this week, plus one that challenges your current direction. Each path shows its trade-off, which perspectives it came from, and the skeptic's strongest pushback.**
 
 ```text
 /brainstorm Our neighborhood bookstore is stuck: weekday visitors are flat. Already tried: a loyalty stamp card, Instagram posts, an author talk once a month. Limits: 2 staff, $500/month marketing, no renovation. Goal: +20% weekday visitors in 3 months.
